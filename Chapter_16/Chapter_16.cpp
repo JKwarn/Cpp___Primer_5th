@@ -82,45 +82,7 @@ int compare(const T& v1, const T& v2)
 
 class Sales_data {};
 
-template <typename T> 
-class Blob
-{
-public:
-    typedef T value_type;
-    typedef typename std::vector<T>::size_type size_type;
-    // 构造函数
-    Blob();
-    Blob(std::initializer_list<T> il);
-    // Blob中的元素数目
-    size_type size() const { return data->size(); }
-    bool empty() const { return data->empty(); ) }
-    // 添加和删除元素
-    void push_back(const T& t) (data->push_back(t);
-    // 移动版本，参见13.6.3节(第484页)
-    void push_back(T&& t) { data->push_back(std::move(t)); }
-    void pop_back();
-    // 元素访问
-    T& back();
-    T& operator [] (size_type i); // 在 14.5 节(第 501 页)中定义 
-private:
-    std::shared_ptr<std::vector<T>> data;
-    // 若data [i]无效，则抛出msg
-    void check(size_type i, const std::string& msg) const;
-};
-
-template <>
-class Blob<int> 
-{
-public:
-    typedef typename std::vector<int>::size_type size_type;
-    Blob();
-    Blob(std::initializer_list<int> il);
-    //...
-    int& operator[](size_type i);
-private:
-    std::shared_ptr<std::vector<int>> data;
-    void check(size_type i, const std::string& msg) const;
-};
+#include "Blob.h"
 
 int main()
 {
@@ -152,6 +114,12 @@ int main()
     // 实例化出 int compare (const vector<int>&, const vector<int>&)
     std::vector<int> vecl{ 1, 2, 3 }, vec2{ 4, 5, 6 };
     std::cout << compare(vecl, vec2) << std::endl; // T = vector<int>
+
+    // 实例化Blob<int>和接受initializer_list<int>的构造函数 
+    Blob<int> squares = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    // 实例化 Blob<int>::size() const 
+    for (size_t i = 0; i != squares.size(); ++i)
+        squares[i] = i * i; // 实例化 Blob<int>::operator[] (size_t)
 
     compare("hi", "mom");
 
