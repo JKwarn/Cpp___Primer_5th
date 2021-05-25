@@ -30,6 +30,7 @@ bool operator==(const Blob<T>&, const Blob<T>&);
 template <typename T> class Blob {
     // each instantiation of Blob grants access to the version of
     // BlobPtr and the equality operator instantiated with the same type
+    // 每个Blob实例,将访问权限授予,用相同类型实例化的BlobPtr和相等运算符. 
     friend class BlobPtr<T>;
     friend bool operator==<T>
         (const Blob<T>&, const Blob<T>&);
@@ -201,30 +202,32 @@ operator==(const Blob<T> lhs, const Blob<T> rhs)
     }
     return true;
 }
-
-// BlobPtr 会在尝试访问不存在的元素时候，抛出一个异常。
-template <typename T>
-class BlobPtr
-{
-public:
-    BlobPtr() : curr(0) {}
-    BlobPtr(Blob<T> &a, size_t sz = 0) : wptr(a.data), curr(sz) {}
-    T& operator*() const
-    {
-        auto p = check(curr, "dereference past end");
-        return (*p)[curr]; // (*p)为本对象指向的 vector
-    };
-
-    // 递增和递减
-    BlobPtr& operator++ (); // 前置运算符
-    BlobPtr& operator-- ();
-private:
-    // 若检查成功，check返回一个指向vector的shared_ptr
-    std::shared_ptr<std::vector<T>> check(std::size_t, const std::strings) const;
-    // 保存一个weak_ptr,表示底层vector可能被销毁
-    std::weak_ptr<std::vector<T>> wptr;
-    std::size_t curr; // 数组中的当前位置
-};
+//
+//// BlobPtr 会在尝试访问不存在的元素时候，抛出一个异常。
+//template <typename T>
+//class BlobPtr
+//{
+//public:
+//    BlobPtr() : curr(0) {}
+//    BlobPtr(Blob<T> &a, size_t sz = 0) : wptr(a.data), curr(sz) {}
+//    T& operator*() const
+//    {
+//        auto p = check(curr, "dereference past end");
+//        return (*p)[curr]; // (*p)为本对象指向的 vector
+//    };
+//
+//    // 递增和递减
+//    BlobPtr& operator++ (); // 前置运算符
+//    BlobPtr& operator-- ();
+//    BlobPtr<T>& operator++();
+//    BlobPtr<T>& operator--();
+//private:
+//    // 若检查成功，check返回一个指向vector的shared_ptr
+//    std::shared_ptr<std::vector<T>> check(std::size_t, const std::strings) const;
+//    // 保存一个weak_ptr,表示底层vector可能被销毁
+//    std::weak_ptr<std::vector<T>> wptr;
+//    std::size_t curr; // 数组中的当前位置
+//};
 
 
 // BlobPtr throws an exception on attempts to access a nonexistent element 
@@ -309,12 +312,14 @@ BlobPtr<T>::check(std::size_t i, const std::string& msg) const
 
 // member operators
 // postfix: increment/decrement the object but return the unchanged value
+// 后置：递增/递减对象但返回原值
 template <typename T>
 BlobPtr<T> BlobPtr<T>::operator++(int)
 {
     // no check needed here; the call to prefix increment will do the check
+    // 此处无须检查；调用前置递增时会进行检查
     BlobPtr ret = *this;   // save the current value
-    ++* this;     // advance one element; prefix ++ checks the increment
+    ++ *this;     // advance one element; prefix ++ checks the increment
     return ret;  // return the saved state
 }
 
@@ -345,4 +350,22 @@ BlobPtr<T>& BlobPtr<T>::operator--()
     check(-1, "decrement past begin of BlobPtr");
     return *this;
 }
+
+
+class Vehicle;
+class Student;
+
+typedef Blob<std::string> StrBlob;
+
+template<typename T> using twin = std::pair<T, T>;
+twin<std::string> authors; // authors是一个pair<string, string>
+
+twin<int> win_loss; // win_loss是一个pair<int, int>
+twin<double> area; // area 是一个 pair<double, double>
+
+template <typename T> using partNo = std::pair<T, unsigned >;
+partNo<std::string> books; // books 是一个 pair<string, unsigned>
+partNo<Vehicle> cars; // cars是一pair<Vehicle, unsigned>
+partNo<Student> kids; // kids是一个pair<Student, unsigned> 
+
 #endif
