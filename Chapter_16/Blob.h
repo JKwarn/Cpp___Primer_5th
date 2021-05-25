@@ -1,4 +1,4 @@
-#include "Version_test.h"
+// #include "Version_test.h"
 
 #ifndef BLOB_H
 #define BLOB_H
@@ -352,20 +352,20 @@ BlobPtr<T>& BlobPtr<T>::operator--()
 }
 
 
-class Vehicle;
-class Student;
-
-typedef Blob<std::string> StrBlob;
-
-template<typename T> using twin = std::pair<T, T>;
-twin<std::string> authors; // authors是一个pair<string, string>
-
-twin<int> win_loss; // win_loss是一个pair<int, int>
-twin<double> area; // area 是一个 pair<double, double>
-
-template <typename T> using partNo = std::pair<T, unsigned >;
-partNo<std::string> books; // books 是一个 pair<string, unsigned>
-partNo<Vehicle> cars; // cars是一pair<Vehicle, unsigned>
-partNo<Student> kids; // kids是一个pair<Student, unsigned> 
+//class Vehicle;
+//class Student;
+//
+//typedef Blob<std::string> StrBlob;
+//
+//template<typename T> using twin = std::pair<T, T>;
+//twin<std::string> authors; // authors是一个pair<string, string>
+//
+//twin<int> win_loss; // win_loss是一个pair<int, int>
+//twin<double> area; // area 是一个 pair<double, double>
+//
+//template <typename T> using partNo = std::pair<T, unsigned >;
+//partNo<std::string> books; // books 是一个 pair<string, unsigned>
+//partNo<Vehicle> cars; // cars是一pair<Vehicle, unsigned>
+//partNo<Student> kids; // kids是一个pair<Student, unsigned> 
 
 #endif
