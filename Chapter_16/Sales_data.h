@@ -116,4 +116,18 @@ std::istream& read(std::istream&, Sales_data&);
 Sales_data operator+(const Sales_data&, const Sales_data&);
 std::ostream& operator<<(std::ostream&, const Sales_data&);
 std::istream& operator>>(std::istream&, Sales_data&);
+
+
+template <class T = int> // T 默认为 int
+class Numbers
+{
+public:
+    Numbers(T v = 0) : val(v) { }
+
+    //对数值的各种操作
+private:
+    T val;
+};
+Numbers<long double> lots_of_precision;
+Numbers<> average_precision; //空。表示我们希望使用默认类型
 #endif

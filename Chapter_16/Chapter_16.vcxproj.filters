@@ -13,6 +13,18 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="头文件\16.1.4_成员模板">
+      <UniqueIdentifier>{8d4dbc23-282d-41b1-8ad5-79e88644a8ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\16.1.4_成员模板">
+      <UniqueIdentifier>{b322eeb0-7a25-46df-b81f-6dc11a4d0670}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="源文件\16.1.5_控制实例化">
+      <UniqueIdentifier>{34aebd71-49df-418b-859f-db104d2603a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="头文件\16.1.5_控制实例化">
+      <UniqueIdentifier>{ae180e32-d7f4-4094-89c8-a371463fc774}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chapter_16.cpp">
@@ -28,6 +40,12 @@
     </ClInclude>
     <ClInclude Include="Pal.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="DebugDelete.h">
+      <Filter>头文件\16.1.4_成员模板</Filter>
+    </ClInclude>
+    <ClInclude Include="Controlling Instantiations.h">
+      <Filter>头文件\16.1.5_控制实例化</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
